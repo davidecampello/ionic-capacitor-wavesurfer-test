@@ -1,0 +1,7 @@
+{
+  "name": "ionic-wavesurfer-test",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
