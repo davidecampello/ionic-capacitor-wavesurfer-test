@@ -7,15 +7,25 @@ import WaveSurfer from 'wavesurfer.js';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements ViewDidEnter{
+export class HomePage implements ViewDidEnter {
   @ViewChild('wave') wave: ElementRef;
   private wavesurfer: WaveSurfer;
 
-  constructor(private platform: Platform) {}
+  constructor(private platform: Platform) { }
   ionViewDidEnter(): void {
 
   }
 
+  iosAudio() {
+    const audioios = document.createElement('audio');
+    audioios.id = 'audio-player-iosfix';
+    audioios.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU2LjM2LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAEAAABIADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV6urq6urq6urq6urq6urq6urq6urq6urq6v////////////////////////////////8AAAAATGF2YzU2LjQxAAAAAAAAAAAAAAAAJAAAAAAAAAAAASDs90hvAAAAAAAAAAAAAAAAAAAA//MUZAAAAAGkAAAAAAAAA0gAAAAATEFN//MUZAMAAAGkAAAAAAAAA0gAAAAARTMu//MUZAYAAAGkAAAAAAAAA0gAAAAAOTku//MUZAkAAAGkAAAAAAAAA0gAAAAANVVV';
+    // @ts-ignore
+    audioios.type = 'audio/mpeg';
+
+    audioios.play();
+    audioios.remove();
+  }
 
   stop(): void {
     this.wavesurfer.stop();
@@ -40,6 +50,8 @@ export class HomePage implements ViewDidEnter{
       context = new AudioContext();
       processor = context.createScriptProcessor(1024, 1, 1);
     }
+
+    this.iosAudio()
 
     this.wavesurfer = WaveSurfer.create({
       audioContext: context || null,
